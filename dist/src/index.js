@@ -42,21 +42,16 @@ const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("./db/connection"));
 const error_handler_1 = __importDefault(require("./middleware/error-handler"));
 const morgan_1 = __importDefault(require("morgan"));
-const auth_router_1 = __importDefault(require("./routes/auth.router"));
-const post_router_1 = __importDefault(require("./routes/post.router"));
-const auth_middleware_1 = __importDefault(require("./middleware/auth.middleware"));
 const errors_1 = require("./errors");
+const index_route_1 = __importDefault(require("./routes/index.route"));
 dotenv.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)('combined'));
-app.use('/api/v1/auth', auth_router_1.default);
-app.use('/api/v1/post', auth_middleware_1.default, post_router_1.default);
-app.use(() => {
-    throw new errors_1.NotFoundError('Route was not found');
-});
+app.use('/', index_route_1.default);
+app.use(() => { throw new errors_1.NotFoundError('Route was not found'); });
 app.use(error_handler_1.default);
 const port = process.env.PORT || 3000;
 (() => __awaiter(void 0, void 0, void 0, function* () {

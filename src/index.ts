@@ -5,10 +5,8 @@ import cors from 'cors'
 import connectDB from './db/connection'
 import errorHandler from './middleware/error-handler'
 import morgan from 'morgan'
-import authRouter from './routes/auth.router'
-import postRouter from './routes/post.router'
-import authorize from './middleware/auth.middleware'
 import { NotFoundError } from './errors'
+import indexRouter from './routes/index.route'
 
 dotenv.config()
 
@@ -19,14 +17,8 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(morgan('combined'))
-
-app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/post', authorize, postRouter)
-
-app.use(() => {
-  throw new NotFoundError('Route was not found')
-})
-
+app.use('/', indexRouter)
+app.use(() => { throw new NotFoundError('Route was not found') })
 app.use(errorHandler)
 
 const port = process.env.PORT || 3000
