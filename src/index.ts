@@ -1,5 +1,5 @@
 import 'express-async-errors'
-import express, { Express } from 'express'
+import express, { Express, NextFunction, Request, Response } from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 import connectDB from './db/connection'
@@ -23,7 +23,7 @@ app.use(express.json())
 
 app.use(morgan('combined'))
 
-app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/auth', (req: Request, res: Response, next: NextFunction) => res.status(200).json({ message: 'auth working' }))
 app.use('/api/v1/post', authorize, postRouter)
 
 app.use(() => {
