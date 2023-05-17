@@ -14,7 +14,6 @@ import authRouter from './routes/auth.router'
 import postRouter from './routes/post.router'
 import authorize from './middleware/auth.middleware'
 import { NotFoundError } from './errors'
-import { signin } from './controllers/auth.controller'
 
 const app: Express = express()
 
