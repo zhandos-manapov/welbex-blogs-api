@@ -12,6 +12,7 @@ dotenv.config()
 import authRouter from './routes/auth.router'
 import postRouter from './routes/post.router'
 import authorize from './middleware/auth.middleware'
+import { NotFoundError } from './errors'
 
 const app: Express = express()
 
@@ -19,9 +20,13 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-// app.use(morgan('tiny'))
+app.use(morgan('combined'))
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/post', authorize, postRouter)
+
+app.use(() => {
+  throw new NotFoundError('Route was not found')
+})
 
 app.use(errorHandler)
 
