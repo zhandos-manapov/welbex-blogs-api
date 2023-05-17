@@ -24,9 +24,9 @@ app.use(morgan('combined'))
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/post', authorize, postRouter)
 
-app.use(() => {
-  throw new NotFoundError('Route was not found')
-})
+// app.use(() => {
+//   throw new NotFoundError('Route was not found')
+// })
 
 app.use(errorHandler)
 
