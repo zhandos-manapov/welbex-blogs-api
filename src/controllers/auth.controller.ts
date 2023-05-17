@@ -15,7 +15,7 @@ const signin = async (req: Request, res: Response) => {
   // if (!valid) throw new UnauthorizedError('Invalid credentials')
 
   // const token = db_user.issueJWT()
-  return res.status(StatusCodes.OK).json({message: 'Signin function working'})
+  res.status(StatusCodes.OK).json({ message: 'Signin function working' })
 }
 
 const signup = async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ const signup = async (req: Request, res: Response) => {
   }
 
   await User.create(payloadUser)
-  return res.status(StatusCodes.CREATED).json({ message: 'Successfully registed' })
+  res.status(StatusCodes.CREATED).json({ message: 'Successfully registed' })
 }
 
 export { signup, signin }
