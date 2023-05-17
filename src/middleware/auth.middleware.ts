@@ -7,7 +7,7 @@ export default function authorize(req: Request, res: Response, next: NextFunctio
   if (tokenParts[0] === 'Bearer' && tokenParts[1].match(/\S+\.\S+\.\S+/) !== null) {
     try {
       const verification = jwt.verify(tokenParts[1], process.env.PUBLIC_KEY as string, { algorithms: ['RS256'] })
-      res.locals.user = verification
+      res.locals = { user: verification }
       console.log(verification)
       next()
     } catch (error) {
