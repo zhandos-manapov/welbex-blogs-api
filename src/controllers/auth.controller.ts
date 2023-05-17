@@ -5,36 +5,36 @@ import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors'
 import { StatusCodes } from 'http-status-codes'
 
 const signin = async (req: Request, res: Response) => {
-  // const user = req.body
-  // const db_user = await User.findOne({ email: user.email })
+  const user = req.body
+  const db_user = await User.findOne({ email: user.email })
 
-  // if (!db_user) throw new NotFoundError('User email does not exist')
+  if (!db_user) throw new NotFoundError('User email does not exist')
 
-  // const valid = db_user.validPassword(user.password)
+  const valid = db_user.validPassword(user.password)
 
-  // if (!valid) throw new UnauthorizedError('Invalid credentials')
+  if (!valid) throw new UnauthorizedError('Invalid credentials')
 
-  // const token = db_user.issueJWT()
-  res.status(StatusCodes.OK).json({ message: 'Signin function working' })
+  const token = db_user.issueJWT()
+  res.status(StatusCodes.OK).json(token)
 }
 
 const signup = async (req: Request, res: Response) => {
-  // const checkUser = await User.findOne({ email: req.body.email })
+  const checkUser = await User.findOne({ email: req.body.email })
 
-  // if (checkUser) throw new BadRequestError('Email already exists')
+  if (checkUser) throw new BadRequestError('Email already exists')
 
-  // const user = req.body
-  // const { salt, hash } = genHash(user.password)
+  const user = req.body
+  const { salt, hash } = genHash(user.password)
 
-  // const payloadUser = {
-  //   firstName: user.firstName,
-  //   lastName: user.lastName,
-  //   email: user.email,
-  //   salt,
-  //   hash,
-  // }
+  const payloadUser = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    salt,
+    hash,
+  }
 
-  // await User.create(payloadUser)
+  await User.create(payloadUser)
   res.status(StatusCodes.CREATED).json({ message: 'Successfully registed' })
 }
 

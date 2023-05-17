@@ -5,14 +5,12 @@ import cors from 'cors'
 import connectDB from './db/connection'
 import errorHandler from './middleware/error-handler'
 import morgan from 'morgan'
-
-dotenv.config()
-
-// Routes
 import authRouter from './routes/auth.router'
 import postRouter from './routes/post.router'
 import authorize from './middleware/auth.middleware'
 import { NotFoundError } from './errors'
+
+dotenv.config()
 
 const app: Express = express()
 
@@ -22,12 +20,12 @@ app.use(express.json())
 
 app.use(morgan('combined'))
 
-app.use('/', authRouter)
-// app.use('/api/v1/post', authorize, postRouter)
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/post', authorize, postRouter)
 
-// app.use(() => {
-//   throw new NotFoundError('Route was not found')
-// })
+app.use(() => {
+  throw new NotFoundError('Route was not found')
+})
 
 app.use(errorHandler)
 
