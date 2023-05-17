@@ -5,6 +5,7 @@ import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors'
 import { StatusCodes } from 'http-status-codes'
 
 const signin = async (req: Request, res: Response) => {
+  console.log(process.env.PRIVATE_KEY)
   const user = req.body
   const db_user = await User.findOne({ email: user.email })
 

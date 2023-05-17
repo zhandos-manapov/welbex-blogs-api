@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(morgan('combined'))
+
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/post', authorize, postRouter)
 
