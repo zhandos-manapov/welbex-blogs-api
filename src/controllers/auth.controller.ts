@@ -19,23 +19,23 @@ const signin = async (req: Request, res: Response) => {
 }
 
 const signup = async (req: Request, res: Response) => {
-  const checkUser = await User.findOne({ email: req.body.email })
+  // const checkUser = await User.findOne({ email: req.body.email })
 
-  if (checkUser) throw new BadRequestError('Email already exists')
+  // if (checkUser) throw new BadRequestError('Email already exists')
 
-  const user = req.body
-  const { salt, hash } = genHash(user.password)
+  // const user = req.body
+  // const { salt, hash } = genHash(user.password)
 
-  const payloadUser = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    salt,
-    hash,
-  }
+  // const payloadUser = {
+  //   firstName: user.firstName,
+  //   lastName: user.lastName,
+  //   email: user.email,
+  //   salt,
+  //   hash,
+  // }
 
-  await User.create(payloadUser)
+  // await User.create(payloadUser)
   res.status(StatusCodes.CREATED).json({ message: 'Successfully registed' })
 }
 
-export { signup, signin }
+export { signin, signup }

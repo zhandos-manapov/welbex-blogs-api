@@ -1,11 +1,10 @@
 import 'express-async-errors'
-import express, { Express, NextFunction, Request, Response } from 'express'
+import express, { Express } from 'express'
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 import connectDB from './db/connection'
 import errorHandler from './middleware/error-handler'
 import morgan from 'morgan'
-import http from 'http'
 
 dotenv.config()
 
@@ -37,10 +36,7 @@ const port = process.env.PORT || 3000
 ;(async () => {
   try {
     await connectDB(process.env.MONGO_URI!)
-    const server = http.createServer(app)
-    server.listen(port)
-    console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
-    // app.listen(port, () => console.log(`⚡️[server]: Server is running at http://localhost:${port}`))
+    app.listen(port, () => console.log(`⚡️[server]: Server is running at http://localhost:${port}`))
   } catch (err) {
     console.log(err)
   }
