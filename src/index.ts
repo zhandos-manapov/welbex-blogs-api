@@ -14,6 +14,7 @@ import authRouter from './routes/auth.router'
 import postRouter from './routes/post.router'
 import authorize from './middleware/auth.middleware'
 import { NotFoundError } from './errors'
+import { signin } from './controllers/auth.controller'
 
 const app: Express = express()
 
@@ -23,7 +24,7 @@ app.use(express.json())
 
 app.use(morgan('combined'))
 
-app.use('/api/v1/auth', (req: Request, res: Response, next: NextFunction) => res.status(200).json({ message: 'auth working' }))
+app.use('/api/v1/auth', signin)
 app.use('/api/v1/post', authorize, postRouter)
 
 app.use(() => {
