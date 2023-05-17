@@ -11,7 +11,7 @@ function authorize(req, res, next) {
     if (tokenParts[0] === 'Bearer' && tokenParts[1].match(/\S+\.\S+\.\S+/) !== null) {
         try {
             const verification = jsonwebtoken_1.default.verify(tokenParts[1], process.env.PUBLIC_KEY, { algorithms: ['RS256'] });
-            res.locals.user = verification;
+            res.locals = { user: verification };
             console.log(verification);
             next();
         }
