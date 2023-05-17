@@ -5,18 +5,17 @@ import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors'
 import { StatusCodes } from 'http-status-codes'
 
 const signin = async (req: Request, res: Response) => {
-  console.log(process.env.PRIVATE_KEY)
-  const user = req.body
-  const db_user = await User.findOne({ email: user.email })
+  // const user = req.body
+  // const db_user = await User.findOne({ email: user.email })
 
-  if (!db_user) throw new NotFoundError('User email does not exist')
+  // if (!db_user) throw new NotFoundError('User email does not exist')
 
-  const valid = db_user.validPassword(user.password)
+  // const valid = db_user.validPassword(user.password)
 
-  if (!valid) throw new UnauthorizedError('Invalid credentials')
+  // if (!valid) throw new UnauthorizedError('Invalid credentials')
 
-  const token = db_user.issueJWT()
-  return res.status(StatusCodes.OK).json(token)
+  // const token = db_user.issueJWT()
+  return res.status(StatusCodes.OK).json({message: 'Signin function working'})
 }
 
 const signup = async (req: Request, res: Response) => {
