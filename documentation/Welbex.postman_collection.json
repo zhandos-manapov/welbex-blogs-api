@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "6b7ed211-e817-4e24-8a3a-81718423ecc9",
+		"name": "Welbex",
+		"description": "# Welbex Blogs API\n\nAPI URL = [https://welbex.onrender.com/api/v1](https://welbex.onrender.com/api/v1) ,\n\nClick the _**View complete collection documentation**_ button down below 👇 to learn more about the API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22827905"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Zhandos\",\n    \"lastName\": \"Manapov\", \n    \"email\": \"zandosmanapov@gmail.com\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://welbex.onrender.com/api/v1/auth/register",
+							"protocol": "https",
+							"host": [
+								"welbex",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Signup request for new users"
+					},
+					"response": []
+				},
+				{
+					"name": "Signin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"zandosmanapov@gmail.com\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://welbex.onrender.com/api/v1/auth/login",
+							"protocol": "https",
+							"host": [
+								"welbex",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Signin request for existing users"
+					},
+					"response": []
+				}
+			],
+			"description": "This folder contains routes for authorizing users in the Blogs API."
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get Posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://welbex.onrender.com/api/v1/post?page=1",
+							"protocol": "https",
+							"host": [
+								"welbex",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						},
+						"description": "View the Posts of the current authorized user."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "message",
+									"value": "first message",
+									"description": "string, required",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"value": "media file ",
+									"description": "File",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://welbex.onrender.com/api/v1/post",
+							"protocol": "https",
+							"host": [
+								"welbex",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post"
+							]
+						},
+						"description": "Add a new Post"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{JWT}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"new message 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://welbex.onrender.com/api/v1/post/:id",
+							"protocol": "https",
+							"host": [
+								"welbex",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"post",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "number"
+								}
+							]
+						},
+						"description": "Update Post message field"
+					},
+					"response": []
+				}
+			],
+			"description": "This folder container routes for CRUD operations on Posts"
+		}
+	]
+}
